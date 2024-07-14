@@ -9,7 +9,7 @@
 }
 
 @layer base {
-  @font face {
+  @font-face {
     .ubuntu {
       font-family: "Ubuntu", sans-serif;
     }

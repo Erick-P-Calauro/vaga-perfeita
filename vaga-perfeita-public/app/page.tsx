@@ -2,8 +2,17 @@ import { Footer } from "@/components/footer";
 import { JobCard } from "@/components/job-card";
 import { Menu } from "@/components/menu";
 import { SearchFilters } from "@/components/search-filters";
+import { FiltersData, serverUrl } from "./types-and-constants";
 
-export default function PesquisaPage() {
+async function getFiltersData() {
+  const res = await fetch(`${serverUrl}/load`);
+  
+  return res.json();
+} 
+
+export default async function PesquisaPage() {
+  const filtersData : FiltersData = await getFiltersData();
+
   return (
     <main className="space-y-16">
       <Menu />
@@ -11,7 +20,7 @@ export default function PesquisaPage() {
       <div className="w-[940px] mx-auto">
         <div className="flex gap-10">          
           
-          <SearchFilters />
+          <SearchFilters data={filtersData}/>
 
           <div className="flex flex-1 flex-col space-y-2">
             <span className="font-regular text-base">Resultado da Pesquisa : </span>
