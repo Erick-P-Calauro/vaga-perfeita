@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ubuntu-light {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+@layer base {
+  @font face {
+    .ubuntu {
+      font-family: "Ubuntu", sans-serif;
+    }
+  }
+}
