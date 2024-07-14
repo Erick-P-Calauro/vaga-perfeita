@@ -12,7 +12,7 @@ import com.erick.vaga_perfeita.ModelosCarregados.Local.LocalServico;
 import com.erick.vaga_perfeita.ModelosCarregados.Modalidade.ModalidadeServico;
 
 @RestController
-@RequestMapping("/carregar")
+@RequestMapping("/load")
 public class ModelosControlador {
     
     @Autowired
