@@ -3,7 +3,6 @@ package com.erick.vaga_perfeita.ModelosCarregados.Local;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +23,16 @@ public class LocalServico {
 
     public List<Local> listar() {
         return repositorio.findAll();
+    }
+
+    public Local buscar(Long id) {
+        Optional<Local> local = repositorio.findById(id);
+
+        if(local.isEmpty()) {
+            return null;
+        }
+
+        return local.get();
     }
 
     public Boolean verificar(Long id) {

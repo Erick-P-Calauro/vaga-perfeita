@@ -25,6 +25,16 @@ public class ModalidadeServico {
         return repositorio.findAll();
     }
 
+    public Modalidade buscar(Long id) {
+        Optional<Modalidade> modalidade = repositorio.findById(id);
+
+        if(modalidade.isEmpty()) {
+            return null;
+        }
+
+        return modalidade.get();
+    }
+
     public Boolean verificar(Long id) {
         Optional<Modalidade> faixa = repositorio.findById(id);
 

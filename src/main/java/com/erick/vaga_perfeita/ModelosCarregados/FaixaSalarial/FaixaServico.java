@@ -26,6 +26,16 @@ public class FaixaServico {
         return repositorio.findAll();
     }
 
+    public FaixaSalarial buscar(Long id) {
+        Optional<FaixaSalarial> faixa = repositorio.findById(id);
+
+        if(faixa.isEmpty()) {
+            return null;
+        }
+        
+        return faixa.get();
+    }
+
     public Boolean verificar(Long id) {
         Optional<FaixaSalarial> faixa = repositorio.findById(id);
 
