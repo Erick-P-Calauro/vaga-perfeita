@@ -1,11 +1,15 @@
 'use client';
 
 import { FiltersData } from "@/app/types-and-constants"
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { ChevronUp, ChevronDown } from 'lucide-react';
 
 interface SearchFiltersProps {
     data: FiltersData
+}
+
+async function useFilter(event : FormEvent<HTMLFormElement>) {
+   
 }
 
 export function SearchFilters(props: SearchFiltersProps) {
@@ -92,7 +96,7 @@ export function SearchFilters(props: SearchFiltersProps) {
               </div>
             </form>
             
-            <form className="space-y-2">
+            <form onChange={useFilter} className="space-y-2">
               <span className="text-lg font-bold">MODALIDADES</span>
 
               <div className="ml-5 space-y-2.5">

@@ -6,6 +6,17 @@ export interface FiltersData {
     Modalidades: Modalidade[]
 }
 
+export interface Job {
+    id: string,
+    nomeEmpresa: string,
+    nomeVaga: string,
+    salario: number,
+    cidade: string,
+    tempoDecorrido: number,
+    descricao: string,
+    modalidade: Modalidade
+}
+
 interface FaixaSalarial {
     id: string,
     menorValor: number,

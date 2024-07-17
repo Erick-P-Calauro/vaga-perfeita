@@ -29,6 +29,7 @@ public class ModalidadeServico {
         Optional<Modalidade> modalidade = repositorio.findById(id);
 
         if(modalidade.isEmpty()) {
+            // Mudar para erro personalizado
             return null;
         }
 

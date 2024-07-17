@@ -30,6 +30,7 @@ public class FaixaServico {
         Optional<FaixaSalarial> faixa = repositorio.findById(id);
 
         if(faixa.isEmpty()) {
+            // Mudar para erro personalizado
             return null;
         }
         

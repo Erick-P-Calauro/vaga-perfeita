@@ -7,8 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.erick.vaga_perfeita.ModelosCarregados.Estado.EstadoServico;
 import com.erick.vaga_perfeita.ModelosCarregados.FaixaSalarial.FaixaServico;
-import com.erick.vaga_perfeita.ModelosCarregados.Local.LocalServico;
 import com.erick.vaga_perfeita.ModelosCarregados.Modalidade.ModalidadeServico;
 
 @RestController
@@ -19,7 +20,7 @@ public class ModelosControlador {
     FaixaServico fServico;
 
     @Autowired
-    LocalServico lServico;
+    EstadoServico lServico;
 
     @Autowired
     ModalidadeServico mServico;

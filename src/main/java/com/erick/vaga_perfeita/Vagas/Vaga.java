@@ -1,8 +1,8 @@
 package com.erick.vaga_perfeita.Vagas;
 
 import java.util.UUID;
+import com.erick.vaga_perfeita.ModelosCarregados.Estado.Estado;
 import com.erick.vaga_perfeita.ModelosCarregados.FaixaSalarial.FaixaSalarial;
-import com.erick.vaga_perfeita.ModelosCarregados.Local.Local;
 import com.erick.vaga_perfeita.ModelosCarregados.Modalidade.Modalidade;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,16 +36,19 @@ public class Vaga {
     private double salario;
 
     @Column(nullable = false)
-    private int diasDecorridos;
+    private String cidade;
 
     @Column(nullable = false)
+    private int tempoDecorrido;
+
+    @Column(nullable = false, columnDefinition = "text")
     private String descricao;
 
     @ManyToOne
     private FaixaSalarial faixaSalarial;
 
     @ManyToOne
-    private Local local;
+    private Estado local;
 
     @ManyToOne
     private Modalidade modalidade;

@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import com.erick.vaga_perfeita.ModelosCarregados.Estado.Estado;
+import com.erick.vaga_perfeita.ModelosCarregados.Estado.EstadoServico;
 import com.erick.vaga_perfeita.ModelosCarregados.FaixaSalarial.FaixaSalarial;
 import com.erick.vaga_perfeita.ModelosCarregados.FaixaSalarial.FaixaServico;
-import com.erick.vaga_perfeita.ModelosCarregados.Local.Local;
-import com.erick.vaga_perfeita.ModelosCarregados.Local.LocalServico;
 import com.erick.vaga_perfeita.ModelosCarregados.Modalidade.Modalidade;
 import com.erick.vaga_perfeita.ModelosCarregados.Modalidade.ModalidadeServico;
 import com.erick.vaga_perfeita.Utilidades.CarregadorModelos.Valores.FaixasSalariais;
@@ -24,7 +25,7 @@ public class CarregadorModelos implements CommandLineRunner{
     FaixaServico fServico;
 
     @Autowired
-    LocalServico lServico;
+    EstadoServico lServico;
 
     @Autowired
     ModalidadeServico mServico;
@@ -43,7 +44,7 @@ public class CarregadorModelos implements CommandLineRunner{
 
         for(String local : Locais.retornar()) {
             if(lServico.verificar(id) == false) {
-                lServico.salvar(new Local(id, local, new ArrayList<Vaga>()));
+                lServico.salvar(new Estado(id, local, new ArrayList<Vaga>()));
                 id++;
             }
         }

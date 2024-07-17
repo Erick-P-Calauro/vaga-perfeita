@@ -17,13 +17,14 @@ public class VagaInput {
 
     private double salario;
 
-    private int diasDecorridos;
+    private String cidade;
 
+    
     private String descricao;
 
     private Long faixaSalarial;
 
-    private Long local;
+    private Long estado;
 
     private Long modalidade;
 

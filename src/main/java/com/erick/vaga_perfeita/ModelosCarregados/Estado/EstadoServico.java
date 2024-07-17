@@ -1,4 +1,4 @@
-package com.erick.vaga_perfeita.ModelosCarregados.Local;
+package com.erick.vaga_perfeita.ModelosCarregados.Estado;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,27 +8,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LocalServico {
+public class EstadoServico {
     
     @Autowired
-    LocalRepositorio repositorio;
+    EstadoRepositorio repositorio;
 
     @Autowired
     ModelMapper mapper;
 
-    public void salvar(Local local) {
+    public void salvar(Estado local) {
         repositorio.save(local);
         System.out.println("Local " + local.getId() + " cadastrado com sucesso.");
     }
 
-    public List<Local> listar() {
+    public List<Estado> listar() {
         return repositorio.findAll();
     }
 
-    public Local buscar(Long id) {
-        Optional<Local> local = repositorio.findById(id);
+    public Estado buscar(Long id) {
+        Optional<Estado> local = repositorio.findById(id);
 
         if(local.isEmpty()) {
+            // Mudar para erro personalizado
             return null;
         }
 
@@ -36,7 +37,7 @@ public class LocalServico {
     }
 
     public Boolean verificar(Long id) {
-        Optional<Local> faixa = repositorio.findById(id);
+        Optional<Estado> faixa = repositorio.findById(id);
 
         if(faixa.isPresent()) {
             return true;
@@ -45,10 +46,10 @@ public class LocalServico {
         return false;
     }
 
-    public List<LocalDTO> listarDTO() {
+    public List<EstadoDTO> listarDTO() {
         return repositorio.findAll()
             .stream()
-            .map(local -> mapper.map(local, LocalDTO.class))
+            .map(local -> mapper.map(local, EstadoDTO.class))
             .collect(Collectors.toList());
     }
 }

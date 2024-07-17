@@ -6,11 +6,10 @@ import java.util.UUID;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.erick.vaga_perfeita.ModelosCarregados.Estado.Estado;
+import com.erick.vaga_perfeita.ModelosCarregados.Estado.EstadoServico;
 import com.erick.vaga_perfeita.ModelosCarregados.FaixaSalarial.FaixaSalarial;
 import com.erick.vaga_perfeita.ModelosCarregados.FaixaSalarial.FaixaServico;
-import com.erick.vaga_perfeita.ModelosCarregados.Local.Local;
-import com.erick.vaga_perfeita.ModelosCarregados.Local.LocalServico;
 import com.erick.vaga_perfeita.ModelosCarregados.Modalidade.Modalidade;
 import com.erick.vaga_perfeita.ModelosCarregados.Modalidade.ModalidadeServico;
 import com.erick.vaga_perfeita.Vagas.DTO.VagaInput;
@@ -25,7 +24,7 @@ public class VagaServico {
     FaixaServico faixaServico;
 
     @Autowired
-    LocalServico localServico;
+    EstadoServico estadoServico;
 
     @Autowired
     ModalidadeServico modalidadeServico;
@@ -37,18 +36,21 @@ public class VagaServico {
         Vaga novaVaga = mapper.map(dadosVaga, Vaga.class);
         
         FaixaSalarial faixa = faixaServico.buscar(dadosVaga.getFaixaSalarial());
-        Local local = localServico.buscar(dadosVaga.getLocal());
+        Estado estado = estadoServico.buscar(dadosVaga.getEstado());
         Modalidade modalidade = modalidadeServico.buscar(dadosVaga.getModalidade());
 
         novaVaga.setFaixaSalarial(faixa);
-        novaVaga.setLocal(local);
+        novaVaga.setLocal(estado);
         novaVaga.setModalidade(modalidade);
 
         return novaVaga;
     }
 
     public Vaga salvar(VagaInput dadosVaga) {
-        return repositorio.save(mapearVaga(dadosVaga));
+        Vaga novaVaga = mapearVaga(dadosVaga);
+        novaVaga.setTempoDecorrido(0);
+
+        return repositorio.save(novaVaga);
     }
 
     public List<Vaga> listar() {
@@ -65,17 +67,17 @@ public class VagaServico {
         return repositorio.findById(id);
     }
 
-    public List<Vaga> buscarFiltro(Long idFaixa, Long idLocal, Long idModalidade) {
+    public List<Vaga> buscarFiltro(Long idFaixa, Long idestado, Long idModalidade) {
         FaixaSalarial faixa = null;
-        Local local = null;
+        Estado estado = null;
         Modalidade modalidade = null;
         
         if(idFaixa != null) {
             faixa = faixaServico.buscar(idFaixa);
         }
 
-        if(idLocal != null) {
-            local = localServico.buscar(idLocal);
+        if(idestado != null) {
+            estado = estadoServico.buscar(idestado);
         }
 
         if(idModalidade != null) {
@@ -84,7 +86,7 @@ public class VagaServico {
         
         List<Vaga> vagas = repositorio.findAllByFaixaSalarialOrLocalOrModalidade(
             faixa, 
-            local, 
+            estado, 
             modalidade);
 
         return vagas;

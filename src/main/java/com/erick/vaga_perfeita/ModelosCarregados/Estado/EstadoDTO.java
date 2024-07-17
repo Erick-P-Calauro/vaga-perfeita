@@ -1,4 +1,4 @@
-package com.erick.vaga_perfeita.ModelosCarregados.Local;
+package com.erick.vaga_perfeita.ModelosCarregados.Estado;
 
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LocalDTO {
+public class EstadoDTO {
     
     @Id
     private Long id;

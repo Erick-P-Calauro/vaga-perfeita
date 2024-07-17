@@ -1,4 +1,4 @@
-package com.erick.vaga_perfeita.ModelosCarregados.Local;
+package com.erick.vaga_perfeita.ModelosCarregados.Estado;
 
 import java.util.List;
 import com.erick.vaga_perfeita.Vagas.Vaga;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Local {
+public class Estado {
     
     @Id
     private Long id;
