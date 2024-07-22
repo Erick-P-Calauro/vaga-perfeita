@@ -11,9 +11,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class VagaFiltros {
     
-    private Long faixaSalarial;
+    private Long[] faixasSalariais;
     
-    private Long local;
+    private Long[] estados;
 
-    private Long modalidade;
+    private Long[] modalidades;
 }

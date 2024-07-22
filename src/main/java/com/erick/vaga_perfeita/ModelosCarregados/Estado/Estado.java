@@ -22,6 +22,6 @@ public class Estado {
 
     private String nome;
 
-    @OneToMany(mappedBy = "local")
+    @OneToMany(mappedBy = "estado")
     private List<Vaga> local_vagas;
 }

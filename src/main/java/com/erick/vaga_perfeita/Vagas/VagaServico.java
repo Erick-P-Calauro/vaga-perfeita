@@ -40,7 +40,7 @@ public class VagaServico {
         Modalidade modalidade = modalidadeServico.buscar(dadosVaga.getModalidade());
 
         novaVaga.setFaixaSalarial(faixa);
-        novaVaga.setLocal(estado);
+        novaVaga.setEstado(estado);
         novaVaga.setModalidade(modalidade);
 
         return novaVaga;
@@ -67,24 +67,24 @@ public class VagaServico {
         return repositorio.findById(id);
     }
 
-    public List<Vaga> buscarFiltro(Long idFaixa, Long idestado, Long idModalidade) {
-        FaixaSalarial faixa = null;
-        Estado estado = null;
-        Modalidade modalidade = null;
+    public List<Vaga> buscarFiltro(List<Long> faixasSalariais, List<Long> estados, List<Long> modalidades) {
+        List<FaixaSalarial> faixa = null;
+        List<Estado> estado = null;
+        List<Modalidade> modalidade = null;
         
-        if(idFaixa != null) {
-            faixa = faixaServico.buscar(idFaixa);
+        if(faixasSalariais != null) {
+            faixa = faixasSalariais.stream().map((idFaixa) -> faixaServico.buscar(idFaixa)).toList();
         }
 
-        if(idestado != null) {
-            estado = estadoServico.buscar(idestado);
+        if(estados != null) {
+            estado = estados.stream().map((idEstado) -> estadoServico.buscar(idEstado)).toList();
         }
 
-        if(idModalidade != null) {
-            modalidade = modalidadeServico.buscar(idModalidade);
+        if(modalidades != null) {
+            modalidade = faixasSalariais.stream().map((idModalidade) -> modalidadeServico.buscar(idModalidade)).toList();
         }
         
-        List<Vaga> vagas = repositorio.findAllByFaixaSalarialOrLocalOrModalidade(
+        List<Vaga> vagas = repositorio.findByFaixaSalarialInOrEstadoInOrModalidadeIn(
             faixa, 
             estado, 
             modalidade);

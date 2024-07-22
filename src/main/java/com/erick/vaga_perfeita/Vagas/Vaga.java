@@ -48,7 +48,7 @@ public class Vaga {
     private FaixaSalarial faixaSalarial;
 
     @ManyToOne
-    private Estado local;
+    private Estado estado;
 
     @ManyToOne
     private Modalidade modalidade;

@@ -9,5 +9,5 @@ import com.erick.vaga_perfeita.ModelosCarregados.FaixaSalarial.FaixaSalarial;
 import com.erick.vaga_perfeita.ModelosCarregados.Modalidade.Modalidade;
 
 public interface VagaRepositorio extends JpaRepository<Vaga, UUID> {
-    List<Vaga> findAllByFaixaSalarialOrLocalOrModalidade(FaixaSalarial faixaSalarial, Estado loca, Modalidade modalidade);   
+    List<Vaga> findByFaixaSalarialInOrEstadoInOrModalidadeIn(List<FaixaSalarial> faixa, List<Estado> estado, List<Modalidade> modalidade);
 }

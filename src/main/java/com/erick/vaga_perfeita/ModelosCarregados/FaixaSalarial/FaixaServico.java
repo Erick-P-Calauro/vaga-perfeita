@@ -33,6 +33,8 @@ public class FaixaServico {
             // Mudar para erro personalizado
             return null;
         }
+
+        System.out.print("FAIXA SALARIAL =>"+ faixa.get().toString());
         
         return faixa.get();
     }

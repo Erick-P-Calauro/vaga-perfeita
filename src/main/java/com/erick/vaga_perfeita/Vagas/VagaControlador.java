@@ -3,7 +3,6 @@ package com.erick.vaga_perfeita.Vagas;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +50,23 @@ public class VagaControlador {
 
     @PostMapping("/filtrar")
     public ResponseEntity<List<VagaOutput>> listarVagasFiltro(@RequestBody VagaFiltros filtros) {
-        List<Vaga> vagas = vagaServico.buscarFiltro(filtros.getFaixaSalarial(), filtros.getLocal(), filtros.getModalidade());
+        List<Long> listaFaixas = null;
+        List<Long> listaEstados = null;
+        List<Long> listaModalidades = null;
+        
+        if(filtros.getFaixasSalariais() != null) {
+            listaFaixas = List.of(filtros.getFaixasSalariais());
+        }
+
+        if(filtros.getEstados() != null) {
+            listaEstados = List.of(filtros.getEstados());
+        }
+
+        if(filtros.getModalidades() != null) {
+            listaModalidades = List.of(filtros.getModalidades());
+        }
+
+        List<Vaga> vagas = vagaServico.buscarFiltro(listaFaixas, listaEstados, listaModalidades);
 
         return ResponseEntity.ok(vagas.stream().map(vaga -> mapper.map(vaga, VagaOutput.class)).toList());
     }

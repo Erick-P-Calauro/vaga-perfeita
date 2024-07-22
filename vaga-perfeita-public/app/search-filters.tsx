@@ -6,10 +6,7 @@ import { ChevronUp, ChevronDown } from 'lucide-react';
 
 interface SearchFiltersProps {
     data: FiltersData
-}
-
-async function useFilter(event : FormEvent<HTMLFormElement>) {
-   
+    useFilter: (event: FormEvent<HTMLFormElement>) => void
 }
 
 export function SearchFilters(props: SearchFiltersProps) {
@@ -24,24 +21,24 @@ export function SearchFilters(props: SearchFiltersProps) {
     }
 
     return (
-        <div className="mt-8 space-y-16">
-            <form className="space-y-2">
+        <form onSubmit={props.useFilter} className="mt-8 space-y-16">
+            <div className="space-y-2">
               <span className="text-lg font-bold">FAIXAS SALARIAIS</span>
 
               <div className="ml-5 space-y-2.5">
                 {props.data.Faixas.map((faixa, index) => {
                     if(index == props.data.Faixas.length - 1) {
                         return (
-                            <div key={faixa.id} className="flex items-center gap-5">
-                                <input className="size-5" type="checkbox"/>
+                            <div key={"faixa"+faixa.id} className="flex items-center gap-5">
+                                <input value={"faixa"+faixa.id} className="size-5" type="checkbox"/>
                                 <span>Mais de R$10.000</span>
                             </div>
                         )
                     }
                     
                     return (
-                        <div key={faixa.id} className="flex items-center gap-5">
-                            <input className="size-5" type="checkbox"/>
+                        <div key={"faixa"+faixa.id} className="flex items-center gap-5">
+                            <input value={"faixa"+faixa.id} className="size-5" type="checkbox"/>
                             <span>
                                 R$ {faixa.menorValor.toString()[0] + "." + faixa.menorValor.toString().slice(1) + " "} 
                                 até  
@@ -51,9 +48,9 @@ export function SearchFilters(props: SearchFiltersProps) {
                     )
                 })}
               </div>
-            </form>
+            </div>
             
-            <form className="space-y-2 truncate">
+            <div className="space-y-2 truncate">
               <span className="text-lg font-bold">LOCALIDADES</span>
 
               <div className="ml-5 space-y-2.5">
@@ -67,8 +64,8 @@ export function SearchFilters(props: SearchFiltersProps) {
                         }
                         
                         return (
-                            <div key={local.id} className="flex items-center gap-5">
-                                <input className="size-5" type="checkbox"/>
+                            <div key={"local"+local.id} className="flex items-center gap-5">
+                                <input value={"local"+local.id}  className="size-5" type="checkbox"/>
                                 <span>{local.nome}</span>
                             </div>
                         )
@@ -78,7 +75,7 @@ export function SearchFilters(props: SearchFiltersProps) {
                 ) : (
                     props.data.Locais.map((local, index) => {
                         if(index == 10) {
-                            return <button onClick={openShowLocalidades} className="flex items-center gap-2 text-blue-500 hover:text-blue-400">
+                            return <button key={index} onClick={openShowLocalidades} className="flex items-center gap-2 text-blue-500 hover:text-blue-400">
                                 <span>Ver mais</span>
                                 <ChevronDown className="size-4"/>
                             </button>
@@ -86,7 +83,7 @@ export function SearchFilters(props: SearchFiltersProps) {
                         }else if(index < 10) {
                             return (
                                 <div key={local.id} className="flex items-center gap-5">
-                                    <input className="size-5" type="checkbox"/>
+                                    <input value={"local"+local.id} className="size-5" type="checkbox"/>
                                     <span>{local.nome}</span>
                                 </div>
                             )
@@ -94,22 +91,24 @@ export function SearchFilters(props: SearchFiltersProps) {
                     })
                 )}
               </div>
-            </form>
+            </div>
             
-            <form onChange={useFilter} className="space-y-2">
+            <div className="space-y-2">
               <span className="text-lg font-bold">MODALIDADES</span>
 
               <div className="ml-5 space-y-2.5">
                 {props.data.Modalidades.map((modalidade) => {
                     return (
-                        <div key={modalidade.id} className="flex items-center gap-5">
-                            <input className="size-5" type="checkbox"/>
+                        <div key={"modalidade"+modalidade.id} className="flex items-center gap-5">
+                            <input value={"modalidade"+modalidade.id} className="size-5" type="checkbox"/>
                             <span>{modalidade.nome}</span>
                         </div>
                     )
                 })}
               </div>
-            </form>
-          </div>
+            </div>
+
+            <button className="bg-blue-800 text-white border outline-white px-3 py-1.5 rounded-md text-sm">Filtrar</button>
+        </form>
     )
 }
